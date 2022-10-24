@@ -26,9 +26,9 @@ yarn add "simple-jwt-login"
 ```js
 import { SimpleJwtLogin, RegisterUserInterface } from "simple-jwt-login";
 
-let test: RegisterUserInterface;
+let params: RegisterUserInterface;
 
-test = {
+params = {
   email: "me@mydomain.com",
   password: "my-secret-password",
   nickname: "coolnickname",
@@ -38,7 +38,7 @@ const simpleJwtLogin = new SimpleJwtLogin(
   "http://your-domain.com",
   "/simple-jwt-login/v1"
 );
-let result = simpleJwtLogin.registerUser(test, "MY_AUTH_KEY");
+let result = simpleJwtLogin.registerUser(params, "MY_AUTH_KEY");
 ```
 
 or
@@ -48,12 +48,18 @@ import { SimpleJwtLogin } from "simple-jwt-login";
 
 const simpleJwtLogin = new SimpleJwtLogin(
   "http://your-domain.com",
-  "/simple-jwt-login/v1"
+  "/simple-jwt-login/v1",
+  "AUTH_KEY"
 );
-let result = simpleJwtLogin.registerUser(test, "MY_AUTH_KEY");
+params = {
+  email: "me@mydomain.com",
+  password: "my-secret-password",
+  nickname: "coolnickname",
+};
+let result = simpleJwtLogin.registerUser(params, "MY_AUTH_KEY");
 ```
 
-## Functions
+## Class Methods
 
 ### Constructor
 
