@@ -1,0 +1,15 @@
+## Dev files
+.eslintrc
+.estlintignore
+.prettierignore
+.prettierrc.json
+
+
+## Md files
+README.md
+CONTRIBUTING.md
+
+## GitHub
+.git/
+./github/
+
