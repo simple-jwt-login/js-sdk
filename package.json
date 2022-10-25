@@ -1,6 +1,6 @@
 {
   "name": "simple-jwt-login",
-  "version": "0.1.1",
+  "version": "0.1.4",
   "description": "Simple-JWT-Login SDK TEST",
   "main": "dist/index.js",
   "scripts": {
