@@ -2,7 +2,7 @@
     <img src="https://ps.w.org/simple-jwt-login/assets/banner-772x250.png?rev=2106097" alt="Banner"/>
 </p>
 <p align="center">
-   <img src="https://img.shields.io/npm/dt/simple-jwt-login" alt="npm downlods" />
+   <img src="https://img.shields.io/npm/dt/simple-jwt-login" alt="npm downloads" />
 </p>
 
 # Simple-JWT-Login SDK
