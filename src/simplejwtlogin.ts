@@ -15,6 +15,11 @@ export class SimpleJwtLogin {
   private callback: any;
   private sync = false;
 
+  /**
+   * @param host WordPress instance domain
+   * @param namespace Simple-JWT-Login route namespace. Optional. Default to /simple-jwt-login/v1
+   * @param authCodeKey Simple-JWT-Login AUTH_CODE_KEY. Optional. Default to AUTH_KEY
+   */
   constructor(host: string, namespace = "", authCodeKey = "") {
     this.host = host;
     if (authCodeKey !== "") {
@@ -29,15 +34,23 @@ export class SimpleJwtLogin {
     this.callback = callback;
   }
 
+  /**
+   * @param params Request parameters
+   * @param authCode AuthCode value. Optional
+   */
   public autologin(params: AutologinInterface, authCode = "") {
     if (authCode !== "") {
       params[this.authCodeKey] = authCode;
     }
 
     window.location.href =
-      this.buildUrl() + "/autologin&" + this.querydata(params);
+      this.buildUrl() + "/autologin&" + this.queryData(params);
   }
 
+  /**
+   * @param params Request parameters
+   * @param authCode AuthCode value. Optional
+   */
   public deleteUser(params: DeleteUserInterface, authCode = "") {
     if (authCode !== "") {
       params[this.authCodeKey] = authCode;
@@ -46,6 +59,10 @@ export class SimpleJwtLogin {
     return this.call("DELETE", "/users", params);
   }
 
+  /**
+   * @param params Request parameters
+   * @param authCode AuthCode value. Optional
+   */
   public registerUser(params: RegisterUserInterface, authCode = "") {
     if (authCode !== "") {
       params[this.authCodeKey] = authCode;
@@ -54,6 +71,10 @@ export class SimpleJwtLogin {
     return this.call("POST", "/users", params);
   }
 
+  /**
+   * @param params Request parameters
+   * @param authCode AuthCode value. Optional
+   */
   public resetPassword(params: ResetPasswordInterface, authCode = "") {
     if (authCode !== "") {
       params[this.authCodeKey] = authCode;
@@ -61,6 +82,10 @@ export class SimpleJwtLogin {
     return this.call("POST", "/user/reset_password", params);
   }
 
+  /**
+   * @param params Request parameters
+   * @param authCode AuthCode value. Optional
+   */
   public changePassword(params: ChangePasswordInterface, authCode = "") {
     if (authCode !== "") {
       params[this.authCodeKey] = authCode;
@@ -69,6 +94,10 @@ export class SimpleJwtLogin {
     return this.call("PUT", "/user/reset_password", params);
   }
 
+  /**
+   * @param params Request parameters
+   * @param authCode AuthCode value. Optional
+   */
   public authenticate(params: AuthenticateInterface, authCode = "") {
     if (authCode !== "") {
       params[this.authCodeKey] = authCode;
@@ -77,6 +106,10 @@ export class SimpleJwtLogin {
     return this.call("POST", "/auth", params);
   }
 
+  /**
+   * @param params Request parameters
+   * @param authCode AuthCode value. Optional
+   */
   public refreshToken(params: RefreshTokenInterface, authCode = "") {
     if (authCode !== "") {
       params[this.authCodeKey] = authCode;
@@ -85,6 +118,10 @@ export class SimpleJwtLogin {
     return this.call("POST", "/auth/refresh", params);
   }
 
+  /**
+   * @param params Request parameters
+   * @param authCode AuthCode value. Optional
+   */
   public validateToken(params: ValidateTokenInterface, authCode = "") {
     if (authCode !== "") {
       params[this.authCodeKey] = authCode;
@@ -93,6 +130,10 @@ export class SimpleJwtLogin {
     return this.call("GET", "/auth/validate", params);
   }
 
+  /**
+   * @param params Request parameters
+   * @param authCode AuthCode value. Optional
+   */
   public revokeToken(params: RevokeTokenInterface, authCode = "") {
     if (authCode !== "") {
       params[this.authCodeKey] = authCode;
@@ -105,7 +146,7 @@ export class SimpleJwtLogin {
     return this.host + "/?rest_route=" + this.namespace;
   }
 
-  private querydata(data: any) {
+  private queryData(data: any) {
     const result = [];
     for (const d in data)
       result.push(encodeURIComponent(d) + "=" + encodeURIComponent(data[d]));
@@ -113,6 +154,12 @@ export class SimpleJwtLogin {
     return result.join("&");
   }
 
+  /**
+   * @param method Request method. One of: GET, POST, PUT, PATCH, DELETE
+   * @param endpoint The endpoint that will be called
+   * @param params Request parameters
+   * @private
+   */
   private call(method: string, endpoint: string, params: any = null) {
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = () => {
@@ -134,7 +181,7 @@ export class SimpleJwtLogin {
 
     let callUrl = this.buildUrl() + endpoint;
     if (method === "GET") {
-      callUrl = callUrl + "&" + this.querydata(params);
+      callUrl = callUrl + "&" + this.queryData(params);
       params = null;
     }
 
@@ -143,7 +190,7 @@ export class SimpleJwtLogin {
     const dataToSend = params !== null ? JSON.stringify(params) : null;
     xhttp.send(dataToSend);
 
-    if (this.sync === true) {
+    if (this.sync) {
       return xhttp.responseText;
     }
   }

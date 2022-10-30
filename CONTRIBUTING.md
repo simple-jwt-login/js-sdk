@@ -32,11 +32,11 @@ npm run lint
 ### Prettier
 
 ```bash
-npm prettier:check
+npm run prettier:check
 ```
 
 and in order to format:
 
 ```bash
-npm prettier:format
+npm run prettier:format
 ```
